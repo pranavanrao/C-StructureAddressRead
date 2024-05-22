@@ -3,34 +3,35 @@
 
 struct MyStruct
 {
-    int a;
-    float b;
-    double c;
-    char d;
-    bool e;
+    char m_character;
+    int m_integer;
+    double m_double;
+    float m_floating;
+    bool m_boolean;
 };
 
 int main()
 {
     struct MyStruct str;
 
-    str.a = 10;
-    str.b = 3.1f;
-    str.c = 3.14159;
-    str.d = 'a';
-    str.e = true;
+    str.m_character = 'a';
+    str.m_integer = 10;
+    str.m_double = 3.141597;
+    str.m_floating = 3.141;
+    str.m_boolean = true;
 
-    printf("a : %d\n", str.a);
-    printf("b : %f\n", str.b);
-    printf("c : %lf\n", str.c);
-    printf("d : %c\n", str.d);
-    printf("e : %s\n\n", str.e ? "true" : "flase");
+    printf("Direct access of the structure members : ");
+    printf("a : %c\n", str.m_character);
+    printf("b : %d\n", str.m_integer);
+    printf("c : %f\n", str.m_floating);
+    printf("d : %lf\n", str.m_double);
+    printf("e : %s\n\n", str.m_boolean ? "true" : "flase");
 
-    int* intPtr = &str.a;
-    float* floatPtr = &str.b;
-    double* doublePtr = &str.c;
-    char* charPtr = &str.d;
-    bool* boolPtr = &str.e;
+    char* charPtr = &str.m_character;
+    int* intPtr = &str.m_integer;
+    float* floatPtr = &str.m_floating;
+    double* doublePtr = &str.m_double;
+    bool* boolPtr = &str.m_boolean;
 
     printf("Address of a : %d\n", &intPtr);
     printf("Address of b : %d\n", &floatPtr);
@@ -43,8 +44,25 @@ int main()
 
     size_t size = sizeof(struct MyStruct);
 
+    printf("Size of the structure : %d\n", size);
+
     for (size_t i = 0; i < size; i++) {
-        printf("Byte %zu: %02X\n", i, (unsigned char)strPtr[i]);
+        printf("Byte %zu: %02X ", i, (unsigned char)strPtr[i]);
+
+        // Determine the type of the current byte
+        if (strPtr + i >= (char*)&str.m_character && strPtr + i < (char*)&str.m_character + sizeof(str.m_character)) {
+            printf("(char)\n");
+        } else if (strPtr + i >= (char*)&str.m_integer && strPtr + i < (char*)&str.m_integer + sizeof(str.m_integer)) {
+            printf("(int)\n");
+        } else if (strPtr + i >= (char*)&str.m_double && strPtr + i < (char*)&str.m_double + sizeof(str.m_double)) {
+            printf("(double)\n");
+        } else if (strPtr + i >= (char*)&str.m_floating && strPtr + i < (char*)&str.m_floating + sizeof(str.m_floating)) {
+            printf("(float)\n");
+        } else if (strPtr + i >= (char*)&str.m_boolean && strPtr + i < (char*)&str.m_boolean + sizeof(str.m_boolean)) {
+            printf("(bool)\n");
+        } else {
+            printf("(unknown)\n");
+        }
     }
 
     return 0;
