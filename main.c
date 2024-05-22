@@ -1,14 +1,6 @@
-#include <stdio.h>
-#include <stdbool.h>
+#include "MyStruct.h"
 
-struct MyStruct
-{
-    char m_character;
-    int m_integer;
-    double m_double;
-    float m_floating;
-    bool m_boolean;
-};
+#include <stdio.h>
 
 int main()
 {
