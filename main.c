@@ -7,7 +7,7 @@ int main()
     struct MyStruct str;
 
     str.m_character = 'a';
-    str.m_integer = 10;
+    str.m_integer = 598345;
     str.m_double = 3.141597;
     str.m_floating = 3.141;
     str.m_boolean = true;
@@ -39,9 +39,8 @@ int main()
     printf("Size of the structure : %d\n", size);
 
     for (size_t i = 0; i < size; i++) {
-        printf("Byte %zu: %02X ", i, (unsigned char)strPtr[i]);
+        printf("Byte %zu: Value: %02X Type: ", i, (unsigned char)strPtr[i]);
 
-        // Determine the type of the current byte
         if (strPtr + i >= (char*)&str.m_character && strPtr + i < (char*)&str.m_character + sizeof(str.m_character)) {
             printf("(char)\n");
         } else if (strPtr + i >= (char*)&str.m_integer && strPtr + i < (char*)&str.m_integer + sizeof(str.m_integer)) {
